@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /// <summary>
 /// NGUI Enhance item example
 /// </summary>
+
+
 public class MyNGUIEnhanceItem : EnhanceItem
 {
+    public Action<int> OnSelect;
+    public Action<int> OnDeselect;
+
     private UITexture mTexture;
 
     protected override void OnAwake()
@@ -33,6 +39,15 @@ public class MyNGUIEnhanceItem : EnhanceItem
             mTexture = this.GetComponent<UITexture>();
         if (mTexture != null)
             mTexture.color = isCenter ? Color.white : Color.gray;
+
+        if (isCenter)
+        {
+            if (OnSelect != null) OnSelect(base.CurveOffSetIndex);
+        }
+        else
+        {
+            if (OnDeselect != null) OnDeselect(base.CurveOffSetIndex);
+        }
     }
 
     protected override void OnClickEnhanceItem()

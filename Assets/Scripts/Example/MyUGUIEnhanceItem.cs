@@ -2,9 +2,13 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class MyUGUIEnhanceItem : EnhanceItem
 {
+    public Action<int> OnSelect;
+    public Action<int> OnDeselect;
+
     private Button uButton;
     private RawImage rawImage;
 
@@ -32,5 +36,14 @@ public class MyUGUIEnhanceItem : EnhanceItem
         if (rawImage == null)
             rawImage = GetComponent<RawImage>();
         rawImage.color = isCenter ? Color.white : Color.gray;
+
+        if (isCenter)
+        {
+            if (OnSelect != null) OnSelect(base.CurveOffSetIndex);
+        }
+        else
+        {
+            if (OnDeselect != null) OnDeselect(base.CurveOffSetIndex);
+        }
     }
 }
