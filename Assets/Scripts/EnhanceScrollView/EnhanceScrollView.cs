@@ -36,6 +36,9 @@ public class EnhanceScrollView : MonoBehaviour
     private int mCenterIndex = 0;
     public bool enableLerpTween = true;
 
+    // drag.
+    public bool enableDrag = true;
+
     // center and preCentered item
     private EnhanceItem curCenterItem;
     private EnhanceItem preCenterItem;
@@ -146,7 +149,7 @@ public class EnhanceScrollView : MonoBehaviour
         // 
         // enable the drag actions
         // 
-        EnableDrag(true);
+        EnableDrag(enableDrag);
     }
 
     private void LerpTweenToTarget(float originValue, float targetValue, bool needTween = false)
